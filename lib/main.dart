@@ -1,16 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quizapp/models/Question.dart';
 
 void main() => runApp(MyApp());
-
-class Question {
-  String question;
-  var answers = [];
-
-  Question(String question, List answers) {
-    this.question = question;
-    this.answers = answers;
-  }
-}
 
 class MyApp extends StatelessWidget {
   @override
