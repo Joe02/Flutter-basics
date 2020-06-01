@@ -1,6 +1,6 @@
-# quizapp
+# Quiz App
 
-A new Flutter application.
+An generic Quiz aplication for learning basic flutter knowledge.
 
 ## Getting Started
 
