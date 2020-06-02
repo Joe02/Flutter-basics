@@ -3,32 +3,37 @@ import 'package:quizapp/models/Question.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  MyAppState createState() => MyAppState();
+
+}
+
+class MyAppState extends State<MyApp> {
+  //Transform this into an actual Question class
+  static Question firstQuestion = Question(
+      "Qual o terceiro mês do ano?",
+      ['Abril', 'Maio', 'Março']
+  );
+
+  static Question secondQuesion = Question(
+      "Quantos dias um ano bissexto possui?",
+      ["364","365","366"]
+  );
+
+  static Question thirdQuestion = Question(
+      "1kg de pedras é mais pesado\ndo que 1kg de papel?",
+      ['Claro!?',"Depende...","Não!!"]
+  );
+
+  var answers = [];
+
+  var shownQuestion = firstQuestion;
+
+  var questionNumber = 1;
+
   @override
   Widget build(BuildContext context) {
-
-    //Transform this into an actual Question class
-    var firstQuestion = Question(
-        "Qual o terceiro mês do ano?",
-        ['Abril', 'Maio', 'Março']
-    );
-
-    var secondQuesion = Question(
-        "Quantos dias um ano bissexto possui?",
-        ["364","365","366"]
-    );
-
-    var thirdQuestion = Question(
-      "1kg de pedras é mais pesado do que 1kg de papel?",
-      ['Claro!?',"Depende...","Não!!"]
-    );
-
-
-    var answers = [];
-
-    var shownQuestion = firstQuestion;
-
-    var questionNumber = 1;
 
     return MaterialApp(
       home: Scaffold(
@@ -54,7 +59,16 @@ class MyApp extends StatelessWidget {
                           RaisedButton(
                             child: Text(shownQuestion.answers[index]),
                             onPressed: () {
-                              print("Objeto $index clicado");
+                              setState(() {
+                                answers.add(shownQuestion.answers[index]);
+                                if (shownQuestion == firstQuestion) {
+                                  shownQuestion = secondQuesion;
+                                } else if (shownQuestion == secondQuesion){
+                                  shownQuestion = thirdQuestion;
+                                } else {
+                                  //Add finished quiz screen.
+                                }
+                              });
                             },
                           )
                   )
