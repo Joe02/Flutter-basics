@@ -10,7 +10,8 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  //Transform this into an actual Question class
+
+  //TODO Transform this into an actual Question class
   static Question firstQuestion = Question(
       "Qual o terceiro mês do ano?",
       ['Abril', 'Maio', 'Março']
@@ -42,6 +43,9 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text("Pergunta #$questionNumber"),
         ),
+
+        //TODO Transform this into a Quiz widget so the main class doesnt have to handle all the app.
+
         body: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
