@@ -47,8 +47,9 @@ class QuizState extends State<Quiz> {
   }
 
   //Method to when user selects an answer
-  void onAnswerSelected() {
+  void onAnswerSelected(index) {
     setState(() {
+      answers.add(shownQuestion.answers[index]);
       if (shownQuestion == firstQuestion) {
         shownQuestion = secondQuesion;
         _isBackButtonVisible = true;
@@ -62,6 +63,7 @@ class QuizState extends State<Quiz> {
   //Method to when user press the back button
   void onBackPressed() {
     setState(() {
+      answers.removeLast();
       if (shownQuestion == secondQuesion) {
         shownQuestion = firstQuestion;
         _isBackButtonVisible = false;

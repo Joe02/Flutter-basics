@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class QuestionAnswers extends StatelessWidget {
   final List answers;
-  final void Function() onSelected;
+  final void Function(int) onSelected;
 
   QuestionAnswers(this.answers, this.onSelected);
 
@@ -22,7 +22,7 @@ class QuestionAnswers extends StatelessWidget {
                     answers[index],
                     style: TextStyle(fontSize: 18),
                   ),
-                  onPressed: onSelected,
+                  onPressed: () => onSelected(index)
                 ))),
       ),
     );
