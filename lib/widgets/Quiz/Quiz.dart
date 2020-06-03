@@ -35,8 +35,8 @@ class QuizState extends State<Quiz> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
+
         //Question title
-        //TODO Create a question widget
         QuestionTitle(shownQuestion),
 
         //Question answers
