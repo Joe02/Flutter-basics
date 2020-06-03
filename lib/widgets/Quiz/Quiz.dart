@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizapp/models/Question.dart';
-import 'package:quizapp/widgets/Quiz/components/BackButton.dart';
-import 'package:quizapp/widgets/Quiz/components/QuestionAnswers.dart';
-import 'package:quizapp/widgets/Quiz/components/QuestionTitle.dart';
+import 'package:quizapp/widgets/Quiz/components/backButton.dart';
+import 'package:quizapp/widgets/Quiz/components/questionAnswers.dart';
+import 'package:quizapp/widgets/Quiz/components/questionTitle.dart';
+import 'package:quizapp/widgets/Result/result.dart';
 
 class Quiz extends StatefulWidget {
   @override
@@ -53,9 +54,11 @@ class QuizState extends State<Quiz> {
       if (shownQuestion == firstQuestion) {
         shownQuestion = secondQuesion;
         _isBackButtonVisible = true;
-      } else {
+      } else if (shownQuestion == secondQuesion) {
         shownQuestion = thirdQuestion;
         _isBackButtonVisible = true;
+      } else {
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Result(answers)));
       }
     });
   }
