@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizapp/models/Question.dart';
+import 'package:quizapp/widgets/Quiz/components/QuestionAnswers.dart';
 import 'package:quizapp/widgets/Quiz/components/QuestionTitle.dart';
 
 class Quiz extends StatefulWidget {
@@ -28,6 +29,30 @@ class QuizState extends State<Quiz> {
 
   var _isBackButtonVisible = false;
 
+  void onAnswerSelected() {
+    setState(() {
+      if (shownQuestion == firstQuestion) {
+        shownQuestion = secondQuesion;
+        _isBackButtonVisible = true;
+      } else {
+        shownQuestion = thirdQuestion;
+        _isBackButtonVisible = true;
+      }
+    });
+  }
+
+  void onBackPressed() {
+    setState(() {
+      if (shownQuestion == secondQuesion) {
+        shownQuestion = firstQuestion;
+        _isBackButtonVisible = false;
+      } else {
+        shownQuestion = secondQuesion;
+        _isBackButtonVisible = true;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,63 +62,17 @@ class QuizState extends State<Quiz> {
       children: <Widget>[
 
         //Question title
-        QuestionTitle(shownQuestion),
+        QuestionTitle(shownQuestion.question),
 
         //Question answers
-        //TODO Create a answers widget
-        Flexible(
-          child: Container(
-            margin: EdgeInsets.only(bottom: 25),
-            child: ListView(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(left: 40, right: 40, top: 10),
-                children: new List.generate(
-                    shownQuestion.answers.length,
-                    (index) => RaisedButton(
-                          child: Text(
-                            shownQuestion.answers[index],
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              answers.add(shownQuestion.answers[index]);
-                              if (shownQuestion == firstQuestion) {
-                                _isBackButtonVisible = true;
-                                shownQuestion = secondQuesion;
-                                questionNumber = 2;
-                              } else if (shownQuestion == secondQuesion) {
-                                _isBackButtonVisible = true;
-                                shownQuestion = thirdQuestion;
-                                questionNumber = 3;
-                              } else {
-                                //Add finished quiz screen.
-                              }
-                            });
-                          },
-                        ))),
-          ),
-        ),
+        QuestionAnswers(shownQuestion.answers, onAnswerSelected),
 
         //Back button
         Visibility(
           visible: _isBackButtonVisible,
           child: RaisedButton(
             child: Text("Voltar para última pergunta"),
-            onPressed: () {
-              setState(() {
-                if (shownQuestion == secondQuesion) {
-                  answers.removeLast();
-                  _isBackButtonVisible = false;
-                  shownQuestion = firstQuestion;
-                  questionNumber = 1;
-                } else {
-                  answers.removeLast();
-                  _isBackButtonVisible = true;
-                  shownQuestion = secondQuesion;
-                  questionNumber = 2;
-                }
-              });
-            },
+            onPressed: onBackPressed
           ),
         )
       ],
