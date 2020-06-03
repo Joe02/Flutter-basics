@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizapp/models/Question.dart';
+import 'package:quizapp/widgets/Quiz/components/BackButton.dart';
 import 'package:quizapp/widgets/Quiz/components/QuestionAnswers.dart';
 import 'package:quizapp/widgets/Quiz/components/QuestionTitle.dart';
 
@@ -22,36 +23,8 @@ class QuizState extends State<Quiz> {
       ['Claro!?', "Depende...", "Não!!"]);
 
   var answers = [];
-
   var shownQuestion = firstQuestion;
-
-  var questionNumber = 1;
-
   var _isBackButtonVisible = false;
-
-  void onAnswerSelected() {
-    setState(() {
-      if (shownQuestion == firstQuestion) {
-        shownQuestion = secondQuesion;
-        _isBackButtonVisible = true;
-      } else {
-        shownQuestion = thirdQuestion;
-        _isBackButtonVisible = true;
-      }
-    });
-  }
-
-  void onBackPressed() {
-    setState(() {
-      if (shownQuestion == secondQuesion) {
-        shownQuestion = firstQuestion;
-        _isBackButtonVisible = false;
-      } else {
-        shownQuestion = secondQuesion;
-        _isBackButtonVisible = true;
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +41,34 @@ class QuizState extends State<Quiz> {
         QuestionAnswers(shownQuestion.answers, onAnswerSelected),
 
         //Back button
-        Visibility(
-          visible: _isBackButtonVisible,
-          child: RaisedButton(
-            child: Text("Voltar para última pergunta"),
-            onPressed: onBackPressed
-          ),
-        )
+        QuizBackButton(_isBackButtonVisible, onBackPressed)
       ],
     );
+  }
+
+  //Method to when user selects an answer
+  void onAnswerSelected() {
+    setState(() {
+      if (shownQuestion == firstQuestion) {
+        shownQuestion = secondQuesion;
+        _isBackButtonVisible = true;
+      } else {
+        shownQuestion = thirdQuestion;
+        _isBackButtonVisible = true;
+      }
+    });
+  }
+
+  //Method to when user press the back button
+  void onBackPressed() {
+    setState(() {
+      if (shownQuestion == secondQuesion) {
+        shownQuestion = firstQuestion;
+        _isBackButtonVisible = false;
+      } else {
+        shownQuestion = secondQuesion;
+        _isBackButtonVisible = true;
+      }
+    });
   }
 }
