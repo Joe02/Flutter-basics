@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quizapp/widgets/Quiz.dart';
+import 'package:quizapp/widgets/Quiz/Quiz.dart';
 
 void main() => runApp(MyApp());
 

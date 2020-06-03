@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quizapp/models/Question.dart';
+import 'package:quizapp/widgets/Quiz/components/QuestionTitle.dart';
 
 class Quiz extends StatefulWidget {
   @override
@@ -35,15 +36,11 @@ class QuizState extends State<Quiz> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         //Question title
-        Center(
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(shownQuestion.question,
-              style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center),
-        )),
+        //TODO Create a question widget
+        QuestionTitle(shownQuestion),
 
         //Question answers
+        //TODO Create a answers widget
         Flexible(
           child: Container(
             margin: EdgeInsets.only(bottom: 25),
